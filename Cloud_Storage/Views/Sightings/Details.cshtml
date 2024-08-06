@@ -1,0 +1,42 @@
+﻿@model Cloud_Storage.Models.Sighting
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Sighting</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Sighting_Date)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Sighting_Date)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Sighting_Location)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Sighting_Location)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Birder)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Birder.Birder_Id)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Bird)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Bird.Bird_Id)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.Sighting_Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
