@@ -1,0 +1,27 @@
+﻿@model List<Cloud_Storage.Models.FileModel>
+
+<h1>Files</h1>
+
+<form asp-action="UploadFile" method="post" enctype="multipart/form-data">
+    <input type="file" name="file" />
+    <button type="submit">Upload</button>
+</form>
+
+@if (Model != null && Model.Count > 0)
+{
+    <ul>
+        @foreach (var file in Model)
+        {
+            <li>
+                @file.Name -
+                Size: @file.DisplaySize -
+                Created: @file.LastModified?.ToString("g")
+                - <a asp-action="DownloadFile" asp-route-fileName="@file.Name">Download</a>
+            </li>
+        }
+    </ul>
+}
+else
+{
+    <p>No files found or model is null.</p>
+}

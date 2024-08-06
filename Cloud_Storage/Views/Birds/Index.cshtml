@@ -1,0 +1,40 @@
+﻿@model IEnumerable<Cloud_Storage.Models.Bird>
+
+<h1>Birds</h1>
+<a href="@Url.Action("AddBird", "Birds")" class="btn btn-primary">Add New Bird</a>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Location</th>
+            <th>Image</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var bird in Model)
+        {
+            <tr>
+                <td>@bird.Bird_Name</td>
+                <td>@bird.Description</td>
+                <td>@bird.Location</td>
+                <td>
+                    @if (!string.IsNullOrEmpty(bird.ImageUrl))
+                    {
+                        <img src="@bird.ImageUrl" alt="@bird.Bird_Name" style="width:100px;height:auto;" />
+                    }
+                </td>
+                <td>
+                    <form asp-action="DeleteBird" method="post" style="display:inline;">
+                        <input type="hidden" name="partitionKey" value="@bird.PartitionKey" />
+                        <input type="hidden" name="rowKey" value="@bird.RowKey" />
+                        <input type="hidden" name="ImageUrl" value="@bird.ImageUrl"/>
+                        <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this bird?');">Delete</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

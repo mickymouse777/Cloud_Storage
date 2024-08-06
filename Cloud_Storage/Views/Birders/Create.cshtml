@@ -1,0 +1,19 @@
+﻿@model Cloud_Storage.Models.Birder
+
+<h1>Add New Birder</h1>
+
+<form asp-action="Create" method="post">
+    <div class="form-group">
+        <label asp-for="Birder_Name"></label>
+        <input asp-for="Birder_Name" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="email"></label>
+        <input asp-for="email" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="password"></label>
+        <input asp-for="password" class="form-control" type="password" />
+    </div>
+    <button type="submit" class="btn btn-primary">Save</button>
+</form>

@@ -1,0 +1,45 @@
+﻿@model Cloud_Storage.Models.Sighting
+
+@{
+    var birders = ViewData["Birders"] as List<Cloud_Storage.Models.Birder>;
+    var birds = ViewData["Birds"] as List<Cloud_Storage.Models.Bird>;
+}
+
+<h1>Register a Sighting</h1>
+
+@if (birders == null || birders.Count == 0 || birds == null || birds.Count == 0)
+{
+    <div class="alert alert-warning">
+        No birders or birds available. Please ensure they are added first.
+    </div>
+}
+else
+{
+    <form asp-action="Register" method="post">
+        <div class="form-group">
+            <label asp-for="Birder_ID">Select Birder</label>
+            <select asp-for="Birder_ID" class="form-control" asp-items="@(new SelectList(birders, "Birder_Id", "Birder_Name"))">
+                <option value="">-- Select Birder --</option>
+            </select>
+            <span asp-validation-for="Birder_ID" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Bird_ID">Select Bird</label>
+            <select asp-for="Bird_ID" class="form-control" asp-items="@(new SelectList(birds, "Bird_Id", "Bird_Name"))">
+                <option value="">-- Select Bird --</option>
+            </select>
+            <span asp-validation-for="Bird_ID" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Sighting_Location"></label>
+            <input asp-for="Sighting_Location" class="form-control" />
+            <span asp-validation-for="Sighting_Location" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Sighting_Date"></label>
+            <input asp-for="Sighting_Date" class="form-control" type="datetime" />
+            <span asp-validation-for="Sighting_Date" class="text-danger"></span>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit Sighting</button>
+    </form>
+}
