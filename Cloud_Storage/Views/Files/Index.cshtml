@@ -2,11 +2,24 @@
 
 <h1>Files</h1>
 
-<form asp-action="UploadFile" method="post" enctype="multipart/form-data">
-    <input type="file" name="file" />
-    <button type="submit">Upload</button>
+<!-- Display any messages -->
+@if (TempData["Message"] != null)
+{
+    <div class="alert alert-info">
+        @TempData["Message"]
+    </div>
+}
+
+<!-- Upload form -->
+<form asp-action="Upload" method="post" enctype="multipart/form-data">
+    <div class="form-group">
+        <label for="file">Choose a file to upload:</label>
+        <input type="file" name="file" class="form-control" />
+        <button type="submit" class="btn btn-primary mt-2">Upload</button>
+    </div>
 </form>
 
+<!-- Display uploaded files -->
 @if (Model != null && Model.Count > 0)
 {
     <ul>
@@ -15,7 +28,7 @@
             <li>
                 @file.Name -
                 Size: @file.DisplaySize -
-                Created: @file.LastModified?.ToString("g")
+                Last Modified: @file.LastModified?.ToString("g")
                 - <a asp-action="DownloadFile" asp-route-fileName="@file.Name">Download</a>
             </li>
         }
